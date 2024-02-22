@@ -19,6 +19,12 @@ def generate_launch_description():
         'worlds',
         'turtlebot3_house.world'
     )
+
+    # default_world_path = os.path.join(
+    #     get_package_share_directory('rtab_gazebo'),
+    #     'worlds',
+    #     'custom.world'
+    # )
     
     bot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
@@ -64,9 +70,9 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=['-entity', 'turtlebot3_waffle', '-topic', '/robot_description',
         #arguments=["-database", "rtab_tall", '-entity', 'rtab',
-        "-x", '0.0',
-        "-y", '0.0',
-        "-z", '0.3'],
+        "-x", '-1.0',
+        "-y", '-1.0',
+        "-z", '0.0'],
         output='screen'
     )
 
@@ -75,7 +81,7 @@ def generate_launch_description():
             DeclareLaunchArgument('open_rviz', default_value='true', description='Open RViz.'),
             bot,
             gazebo_launch,
-            rviz_node,
+            #rviz_node,
             spawn_robot_node,
             controller,
         ]
