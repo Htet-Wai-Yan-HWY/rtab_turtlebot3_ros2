@@ -12,19 +12,8 @@ import xacro
 
 def generate_launch_description():
     gazebo_pkg = get_package_share_directory('rtab_gazebo')
-
     description_pkg = get_package_share_directory('rtab_description')
-    default_world_path = os.path.join(
-        get_package_share_directory('turtlebot3_gazebo'),
-        'worlds',
-        'turtlebot3_house.world'
-    )
-
-    # default_world_path = os.path.join(
-    #     get_package_share_directory('rtab_gazebo'),
-    #     'worlds',
-    #     'custom.world'
-    # )
+    default_world_path = os.path.join(gazebo_pkg, 'worlds', 'turtlebot3_house.world')
     
     bot = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([os.path.join(
@@ -36,7 +25,7 @@ def generate_launch_description():
         PythonLaunchDescriptionSource([os.path.join(
         gazebo_pkg,'launch','controller_spawner.launch.py'
         )]), 
-        launch_arguments={'use_sim_time': 'true'}.items()
+        # launch_arguments={'use_sim_time': 'true'}.items()
     )
 
 
@@ -69,10 +58,10 @@ def generate_launch_description():
         package='gazebo_ros',
         executable='spawn_entity.py',
         arguments=['-entity', 'black_donut', '-topic', '/robot_description',
-        #arguments=["-database", "rtab_tall", '-entity', 'rtab',
-        "-x", '-1.0',
-        "-y", '-1.0',
-        "-z", '0.0'],
+        #arguments=["-database", "black_donut_tall", '-entity', 'black_donut',
+        "-x", '0.0',
+        "-y", '0.0',
+        "-z", '0.3'],
         output='screen'
     )
 
